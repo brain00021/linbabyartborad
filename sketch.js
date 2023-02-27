@@ -23,13 +23,16 @@ function preload() {
   createImg2 = loadImage("amber.png");
   createImg3 = loadImage("helly.png");
   createImg4 = loadImage("Jin.png");
+  createImg5 = loadImage("bg1.jpeg");
+  createImg6 = loadImage("bg2.png");
 }
 function setup() {
   c = createCanvas(windowWidth, windowHeight);
 
-  background(0);
+  background(createImg5);
   c.mousePressed(sticky);
-  button = createButton("儲存照片");
+
+  button = createButton("SAVE PICTURE");
   button.position(0, 0);
   button.mousePressed(saveBg);
   // color pikcer
@@ -39,35 +42,53 @@ function setup() {
   // img
   // createImgButton = createButton('上傳照片');
 
-  createImgButton = createButton("珀利");
+  createImgButton5 = createButton("BACKGROUND");
+  createImgButton5.mousePressed(changeBackground);
+  createImgButton5.position(width - 150, 0);
+
+  createImgButton = createButton("POLI");
   createImgButton.mousePressed(changePoli);
   createImgButton.position(0, 60);
 
-  createImgButton4 = createButton("琴");
+  createImgButton4 = createButton("GIN");
   createImgButton4.mousePressed(changeJin);
   createImgButton4.position(0, 30);
   // image(createImg1, 50, 150, 50, 50)
-  createImgButton1 = createButton("羅伊");
+  createImgButton1 = createButton("ROY");
   createImgButton1.mousePressed(changeRoy);
   createImgButton1.position(0, 90);
 
-  createImgButton2 = createButton("安巴");
+  createImgButton2 = createButton("AMBER");
   createImgButton2.mousePressed(changeAmber);
   createImgButton2.position(0, 120);
 
-  createImgButton3 = createButton("海利");
+  createImgButton3 = createButton("HALI");
   createImgButton3.mousePressed(changeHelly);
   createImgButton3.position(0, 150);
   // createImg1.mousePressed(changeBG);
-  paintButton = createButton("筆刷");
+  paintButton = createButton("BRUSH");
   paintButton.mousePressed(changepaint);
   paintButton.position(0, 210);
 
   // clean
-  clearButton = createButton("清除");
+  clearButton = createButton("CLEAN");
   clearButton.mousePressed(removeBroad);
   clearButton.position(0, 250);
 }
+let count = 0;
+function changeBackground() {
+  print("img");
+  mode = "background";
+  imageMode(CORNERS);
+  cleanStyle();
+  createImgButton5.style("background-color", "green");
+  let pic = [createImg5, createImg6];
+
+  background(pic[count % 2]);
+  count++;
+  print(count);
+}
+
 function changeAmber() {
   print("img");
   mode = "amber";
@@ -94,6 +115,7 @@ function cleanStyle() {
   createImgButton2.style("background-color", "#FCFCFC");
   createImgButton3.style("background-color", "#FCFCFC");
   createImgButton4.style("background-color", "#FCFCFC");
+  createImgButton5.style("background-color", "#FCFCFC");
 }
 function draw() {
   // ellipse(mouseX, mouseY, 20, 20);
@@ -146,7 +168,6 @@ function changepaint() {
   paintButton.style("background-color", "green");
 }
 function sticky() {
-  print("imgsticky", mode);
   imageMode(CENTER);
   if (mode === "polie") {
     image(createImg, mouseX, mouseY, 150, 150);
